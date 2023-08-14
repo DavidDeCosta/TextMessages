@@ -1,0 +1,50 @@
+Initialization and Dependencies
+Importing Libraries: The program begins by importing required libraries for sending emails, handling JSON files, and creating a graphical 
+user interface (GUI).
+Importing Provider Information: The program imports the PROVIDERS variable, which likely contains mappings between mobile carriers 
+and their corresponding email addresses used for sending SMS/MMS.
+
+Opt-Out List Management
+Updating Opt-Out List: update_opt_out_list reads the opt_out_list.json file, which contains a list of phone numbers 
+that have opted out of receiving messages. If the file is improperly formatted, it initializes an empty list. It then adds a new 
+number to the list and writes the updated list back to the file.
+
+Processing Opt-Out Emails
+Processing Opt-Out Requests: process_opt_out_emails logs into an email server (Gmail in this case), looks for unread messages 
+in the inbox, and checks for the word "STOP" in the email body. If found, it extracts the phone number from the sender's email 
+address and adds it to the opt-out list.
+
+Sending SMS/MMS via Email
+Sending SMS: send_sms_via_email constructs an email with the content of the SMS, the recipient's email address formatted 
+with the carrier's email domain, and then sends the email using the provided SMTP server and credentials.
+Sending MMS: send_mms_via_email is similar to the above but includes an attachment (like an image) in the email to send a multimedia message.
+
+Bulk Messaging
+Sending Messages to Multiple Recipients: send_all_messages reads the opt-out list and then iterates through a 
+list of phone numbers and providers. If the number hasn't opted out, it sends either an SMS or MMS message depending on 
+whether a file path for an attachment is provided.
+
+GUI for User Interaction
+Image Selection: select_image opens a file dialog allowing the user to select an image file, updating a label with the file path.
+Sending Messages: send_messages gathers user input for the subject, description, and file path from the GUI, and then 
+calls send_all_messages to send the messages.
+GUI Initialization: The code sets up the GUI with buttons, labels, text entry fields, and text areas to provide an 
+interface for the user to input message details and initiate the sending process.
+
+Execution Flow
+The user may run the program, input message details in the GUI, and send messages to a list of recipients.
+Separately, process_opt_out_emails can be run periodically or on a schedule to process opt-out requests from recipients.
+
+Considerations
+Security and Privacy: Handling email credentials and user phone numbers requires careful consideration of security and privacy best practices.
+Provider Configuration: The email-to-SMS/MMS mapping relies on specific configurations for each mobile carrier, 
+usually handled in the PROVIDERS variable.
+Rate Limiting: Sending many emails in a short time may hit rate limits from the email provider.
+The code leverages email-to-SMS/MMS gateways provided by mobile carriers, allowing text and multimedia messages 
+to be sent via standard email protocols, and then converts them to SMS or MMS messages for delivery to the recipient's 
+mobile device. It also monitors for opt-out requests, allowing recipients to stop receiving messages.
+
+
+
+
+

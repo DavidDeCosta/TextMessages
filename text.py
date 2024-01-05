@@ -153,11 +153,6 @@ def send_all_messages(subject, description, file_path):
 
     # List of tuples containing phone numbers and corresponding carriers
     numbers_and_providers = [
-        ("3042764851", "AT&T"),
-        ("3042764856","AT&T"), #wife number
-    #    ("8127080292","Xfinity Mobile"), #Jacob number
-    #    ("3046190640","AT&T"),  #Eric number
-    #    ("7248331361", "Verizon"),   petes number
         # ... other numbers
     ]
 
